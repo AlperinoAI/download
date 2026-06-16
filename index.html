@@ -7,7 +7,7 @@
     <meta name="description" content="Experience liftoff with AlperinoAI, the next-generation agent platform for enterprise automation, creative workflows, and system integration.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* ============================================
            RESET & FOUNDATIONS
@@ -17,7 +17,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
             --color-black: #0a0a0a;
             --color-white: #ffffff;
@@ -32,12 +31,12 @@
             --color-gray-800: #262626;
             --color-gray-900: #171717;
             --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
             --nav-height: 64px;
             --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-medium: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-smooth: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
         html {
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
@@ -45,7 +44,6 @@
             text-rendering: optimizeLegibility;
             scroll-behavior: smooth;
         }
-
         body {
             font-family: var(--font-family);
             background-color: var(--color-white);
@@ -54,7 +52,6 @@
             min-height: 100vh;
             position: relative;
         }
-
         /* ============================================
            CANVAS BACKGROUND
            ============================================ */
@@ -67,7 +64,6 @@
             z-index: 1;
             pointer-events: none;
         }
-
         /* ============================================
            NAVIGATION BAR
            ============================================ */
@@ -88,11 +84,9 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.06);
             transition: background var(--transition-medium);
         }
-
         .navbar:hover {
             background: rgba(255, 255, 255, 0.88);
         }
-
         /* --- Nav Left: Logo + Brand --- */
         .nav-left {
             display: flex;
@@ -101,7 +95,6 @@
             text-decoration: none;
             flex-shrink: 0;
         }
-
         .nav-logo {
             height: 28px;
             width: 28px;
@@ -109,13 +102,11 @@
             align-items: center;
             justify-content: center;
         }
-
         .nav-logo svg {
             height: 28px;
             width: 28px;
             display: block;
         }
-
         .nav-brand {
             font-size: 1.15rem;
             font-weight: 700;
@@ -123,7 +114,6 @@
             letter-spacing: -0.03em;
             line-height: 1;
         }
-
         /* --- Nav Center: Links --- */
         .nav-center {
             display: flex;
@@ -133,7 +123,6 @@
             left: 50%;
             transform: translateX(-50%);
         }
-
         .nav-link {
             position: relative;
             display: flex;
@@ -150,12 +139,10 @@
             user-select: none;
             white-space: nowrap;
         }
-
         .nav-link:hover {
             color: var(--color-black);
             background: rgba(0, 0, 0, 0.04);
         }
-
         .nav-link .chevron {
             width: 10px;
             height: 10px;
@@ -163,18 +150,16 @@
             opacity: 0.5;
             display: inline-block;
         }
-
         /* --- Dropdown --- */
         .nav-item {
             position: relative;
         }
-
         .dropdown {
             position: absolute;
             top: calc(100% + 8px);
             left: 50%;
             transform: translateX(-50%) translateY(-6px);
-            min-width: 220px;
+            min-width: 240px;
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -190,18 +175,15 @@
                         transform var(--transition-medium),
                         visibility var(--transition-medium);
         }
-
         .nav-item:hover .dropdown {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
             transform: translateX(-50%) translateY(0);
         }
-
         .nav-item:hover .chevron {
             transform: rotate(180deg);
         }
-
         .dropdown-link {
             display: flex;
             align-items: center;
@@ -214,12 +196,10 @@
             border-radius: 10px;
             transition: background var(--transition-fast), color var(--transition-fast);
         }
-
         .dropdown-link:hover {
             background: rgba(0, 0, 0, 0.04);
             color: var(--color-black);
         }
-
         .dropdown-link .dd-icon {
             width: 32px;
             height: 32px;
@@ -232,23 +212,19 @@
             flex-shrink: 0;
             transition: background var(--transition-fast);
         }
-
         .dropdown-link:hover .dd-icon {
             background: var(--color-gray-200);
         }
-
         .dropdown-link .dd-text {
             display: flex;
             flex-direction: column;
             gap: 2px;
         }
-
         .dropdown-link .dd-text span {
             font-size: 0.75rem;
             color: var(--color-gray-400);
             font-weight: 400;
         }
-
         /* --- Nav Right: CTA --- */
         .nav-right {
             display: flex;
@@ -256,7 +232,6 @@
             gap: 12px;
             flex-shrink: 0;
         }
-
         .btn-download-nav {
             display: inline-flex;
             align-items: center;
@@ -274,17 +249,14 @@
             letter-spacing: -0.01em;
             line-height: 1;
         }
-
         .btn-download-nav:hover {
             background: var(--color-gray-800);
             transform: translateY(-1px);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
         }
-
         .btn-download-nav:active {
             transform: translateY(0);
         }
-
         /* ============================================
            HERO SECTION
            ============================================ */
@@ -299,7 +271,6 @@
             padding: calc(var(--nav-height) + 40px) 40px 80px;
             text-align: center;
         }
-
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -315,7 +286,6 @@
             margin-bottom: 32px;
             animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
         }
-
         .hero-badge .badge-dot {
             width: 7px;
             height: 7px;
@@ -324,7 +294,6 @@
             animation: pulse-dot 2s ease-in-out infinite;
             flex-shrink: 0;
         }
-
         .hero-badge .badge-cta {
             display: inline-flex;
             align-items: center;
@@ -338,16 +307,13 @@
             text-decoration: none;
             transition: background var(--transition-fast);
         }
-
         .hero-badge .badge-cta:hover {
             background: var(--color-gray-800);
         }
-
         @keyframes pulse-dot {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(0.8); }
         }
-
         .hero-title {
             font-size: clamp(2.8rem, 5.2vw, 5.2rem);
             font-weight: 800;
@@ -358,7 +324,6 @@
             margin-bottom: 24px;
             animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
         }
-
         .hero-subtitle {
             font-size: clamp(1rem, 1.3vw, 1.2rem);
             font-weight: 400;
@@ -368,7 +333,6 @@
             margin-bottom: 48px;
             animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
         }
-
         .hero-actions {
             display: flex;
             align-items: center;
@@ -377,7 +341,6 @@
             justify-content: center;
             animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
         }
-
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -395,24 +358,20 @@
             letter-spacing: -0.01em;
             line-height: 1;
         }
-
         .btn-primary:hover {
             background: var(--color-gray-800);
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         }
-
         .btn-primary:active {
             transform: translateY(0);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-
         .btn-primary .win-icon {
             width: 16px;
             height: 16px;
             flex-shrink: 0;
         }
-
         .btn-secondary {
             display: inline-flex;
             align-items: center;
@@ -431,40 +390,34 @@
             letter-spacing: -0.01em;
             line-height: 1;
         }
-
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.9);
             border-color: rgba(0, 0, 0, 0.2);
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         }
-
         .btn-secondary:active {
             transform: translateY(0);
         }
-
         .btn-secondary .arrow {
             transition: transform var(--transition-fast);
         }
-
         .btn-secondary:hover .arrow {
             transform: translateX(3px);
         }
-
         /* ============================================
            CONTENT SECTIONS
            ============================================ */
         .section {
             position: relative;
             z-index: 2;
-            padding: 120px 40px;
+            padding: 100px 40px;
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         .section-tag {
             font-size: 0.82rem;
             font-weight: 600;
@@ -473,16 +426,22 @@
             letter-spacing: 0.12em;
             margin-bottom: 16px;
         }
-
         .section-title {
             font-size: clamp(2rem, 3.5vw, 3.2rem);
             font-weight: 800;
             letter-spacing: -0.03em;
             color: var(--color-black);
-            margin-bottom: 64px;
+            margin-bottom: 24px;
             text-align: center;
         }
-
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-gray-500);
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 64px;
+        }
         /* --- Products Grid --- */
         .grid-products {
             display: grid;
@@ -490,7 +449,6 @@
             gap: 32px;
             width: 100%;
         }
-
         .card-product {
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
@@ -503,14 +461,12 @@
             cursor: pointer;
             transition: background var(--transition-medium), border-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
         }
-
         .card-product:hover {
             background: rgba(255, 255, 255, 0.95);
             border-color: rgba(0, 0, 0, 0.16);
             transform: translateY(-4px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
         }
-
         .card-icon {
             font-size: 2rem;
             width: 48px;
@@ -522,23 +478,19 @@
             justify-content: center;
             transition: background var(--transition-fast);
         }
-
         .card-product:hover .card-icon {
             background: var(--color-gray-200);
         }
-
         .card-title {
             font-size: 1.4rem;
             font-weight: 700;
             letter-spacing: -0.02em;
         }
-
         .card-desc {
             font-size: 0.95rem;
             color: var(--color-gray-500);
             line-height: 1.6;
         }
-
         .card-cta {
             font-size: 0.875rem;
             font-weight: 600;
@@ -549,16 +501,174 @@
             color: var(--color-black);
             transition: color var(--transition-fast);
         }
-
         .card-cta svg {
             transition: transform var(--transition-fast);
         }
-
         .card-product:hover .card-cta svg {
             transform: translateX(3px);
         }
-
-        /* --- Interactive Use Cases (Tabs) --- */
+        /* ============================================
+           INTERACTIVE WORKSPACE (RinoOS Mockup)
+           ============================================ */
+        .workspace-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 32px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+            margin-bottom: 64px;
+        }
+        .workspace-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding-bottom: 16px;
+        }
+        .workspace-dots {
+            display: flex;
+            gap: 6px;
+        }
+        .workspace-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-gray-200);
+        }
+        .workspace-dot.red { background: #ef4444; }
+        .workspace-dot.yellow { background: #f59e0b; }
+        .workspace-dot.green { background: #10b981; }
+        .workspace-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-gray-500);
+            font-family: var(--font-mono);
+        }
+        .workspace-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .workspace-btn {
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            transition: background var(--transition-fast);
+        }
+        .workspace-btn:hover {
+            background: var(--color-gray-800);
+        }
+        .workspace-btn.secondary {
+            background: transparent;
+            color: var(--color-gray-600);
+            border: 1px solid var(--color-gray-200);
+        }
+        .workspace-btn.secondary:hover {
+            background: var(--color-gray-50);
+            color: var(--color-black);
+        }
+        .workspace-body {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 24px;
+            min-height: 380px;
+        }
+        .workspace-sidebar {
+            border-right: 1px solid rgba(0, 0, 0, 0.06);
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+            transition: background var(--transition-fast), color var(--transition-fast);
+        }
+        .sidebar-item:hover {
+            background: var(--color-gray-50);
+            color: var(--color-black);
+        }
+        .sidebar-item.active {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+        .workspace-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .workspace-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .stat-card {
+            background: var(--color-gray-50);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-gray-400);
+            text-transform: uppercase;
+        }
+        .stat-val {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            font-family: var(--font-mono);
+        }
+        .workspace-logs {
+            background: var(--color-gray-900);
+            color: #10b981;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            border-radius: 12px;
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 240px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .log-line {
+            display: flex;
+            gap: 10px;
+        }
+        .log-time {
+            color: #6b7280;
+            flex-shrink: 0;
+        }
+        .log-txt {
+            word-break: break-all;
+        }
+        /* --- Use Cases Tabs --- */
         .use-cases-tabs {
             display: flex;
             gap: 8px;
@@ -567,7 +677,6 @@
             border-radius: 100px;
             margin-bottom: 48px;
         }
-
         .tab-btn {
             background: transparent;
             border: none;
@@ -579,13 +688,11 @@
             cursor: pointer;
             transition: background var(--transition-fast), color var(--transition-fast);
         }
-
         .tab-btn.active {
             background: var(--color-white);
             color: var(--color-black);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
         }
-
         .tab-content-container {
             width: 100%;
             min-height: 380px;
@@ -598,26 +705,22 @@
             align-items: center;
             gap: 48px;
         }
-
         .tab-text {
             flex: 1;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-
         .tab-title {
             font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: -0.02em;
         }
-
         .tab-desc {
             font-size: 1.05rem;
             color: var(--color-gray-500);
             line-height: 1.65;
         }
-
         .tab-list {
             list-style: none;
             display: flex;
@@ -625,7 +728,6 @@
             gap: 12px;
             margin-top: 8px;
         }
-
         .tab-list li {
             display: flex;
             align-items: center;
@@ -634,12 +736,10 @@
             font-weight: 500;
             color: var(--color-gray-700);
         }
-
         .tab-list li svg {
             color: #22c55e;
             flex-shrink: 0;
         }
-
         .tab-visual {
             flex: 1;
             background: var(--color-gray-50);
@@ -653,7 +753,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .tab-visual::after {
             content: '';
             position: absolute;
@@ -661,7 +760,87 @@
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
             opacity: 0.6;
         }
-
+        /* --- Interactive Documentation Hub --- */
+        .docs-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 32px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+        }
+        .docs-sidebar {
+            background: rgba(0, 0, 0, 0.02);
+            border-right: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .docs-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .docs-group-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+        .docs-item {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background var(--transition-fast), color var(--transition-fast);
+        }
+        .docs-item:hover {
+            color: var(--color-black);
+            background: rgba(0, 0, 0, 0.03);
+        }
+        .docs-item.active {
+            color: var(--color-black);
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .docs-content {
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .docs-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        .docs-body {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.65;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .docs-code {
+            background: var(--color-gray-900);
+            color: #f3f4f6;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            position: relative;
+        }
         /* --- Pricing Section --- */
         .pricing-grid {
             display: grid;
@@ -671,7 +850,6 @@
             max-width: 800px;
             margin: 0 auto;
         }
-
         .pricing-card {
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(12px);
@@ -684,13 +862,11 @@
             position: relative;
             transition: transform var(--transition-medium), background var(--transition-medium), border-color var(--transition-medium);
         }
-
         .pricing-card.premium {
             background: var(--color-white);
             border: 2px solid var(--color-black);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
         }
-
         .pricing-card.premium::before {
             content: 'Recommended';
             position: absolute;
@@ -706,33 +882,27 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-
         .pricing-card:hover {
             transform: translateY(-4px);
         }
-
         .pricing-name {
             font-size: 1.15rem;
             font-weight: 700;
             color: var(--color-gray-500);
         }
-
         .pricing-card.premium .pricing-name {
             color: var(--color-black);
         }
-
         .pricing-price {
             font-size: 3rem;
             font-weight: 800;
             letter-spacing: -0.04em;
         }
-
         .pricing-price span {
             font-size: 1rem;
             font-weight: 500;
             color: var(--color-gray-400);
         }
-
         .pricing-features {
             list-style: none;
             display: flex;
@@ -740,7 +910,6 @@
             gap: 14px;
             margin: 16px 0;
         }
-
         .pricing-features li {
             display: flex;
             align-items: center;
@@ -748,11 +917,9 @@
             font-size: 0.95rem;
             color: var(--color-gray-600);
         }
-
         .pricing-features li svg {
             color: var(--color-black);
         }
-
         .btn-pricing {
             width: 100%;
             padding: 14px;
@@ -764,29 +931,24 @@
             cursor: pointer;
             transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
         }
-
         .btn-pricing.outline {
             border: 1.5px solid rgba(0, 0, 0, 0.12);
             color: var(--color-black);
             background: transparent;
         }
-
         .btn-pricing.outline:hover {
             background: var(--color-gray-100);
         }
-
         .btn-pricing.solid {
             background: var(--color-black);
             color: var(--color-white);
             border: none;
         }
-
         .btn-pricing.solid:hover {
             background: var(--color-gray-800);
         }
-
         /* ============================================
-           GLOBAL INTERACTIVE DETAIL MODAL
+           GLOBAL MODAL & WAITLIST MODAL
            ============================================ */
         .modal-overlay {
             position: fixed;
@@ -803,13 +965,11 @@
             transition: opacity var(--transition-medium), visibility var(--transition-medium);
             padding: 24px;
         }
-
         .modal-overlay.open {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
         }
-
         .modal-card {
             background: var(--color-white);
             border: 1px solid rgba(0, 0, 0, 0.08);
@@ -822,11 +982,9 @@
             transition: transform var(--transition-medium);
             position: relative;
         }
-
         .modal-overlay.open .modal-card {
             transform: scale(1);
         }
-
         .modal-close-btn {
             position: absolute;
             top: 24px;
@@ -842,30 +1000,25 @@
             cursor: pointer;
             transition: background var(--transition-fast);
         }
-
         .modal-close-btn:hover {
             background: var(--color-gray-200);
         }
-
         .modal-icon {
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
-
         .modal-title {
             font-size: 1.6rem;
             font-weight: 850;
             letter-spacing: -0.02em;
             margin-bottom: 16px;
         }
-
         .modal-desc {
             font-size: 1rem;
             color: var(--color-gray-600);
             line-height: 1.65;
             margin-bottom: 32px;
         }
-
         .modal-btn {
             width: 100%;
             display: block;
@@ -879,11 +1032,62 @@
             text-decoration: none;
             transition: background var(--transition-fast);
         }
-
         .modal-btn:hover {
             background: var(--color-gray-800);
         }
-
+        /* --- Waitlist Form inside Modal --- */
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin-top: 12px;
+        }
+        .waitlist-input {
+            padding: 16px 20px;
+            border-radius: 100px;
+            border: 1.5px solid var(--color-gray-200);
+            font-family: var(--font-family);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color var(--transition-fast);
+        }
+        .waitlist-input:focus {
+            border-color: var(--color-black);
+        }
+        .waitlist-submit {
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+            padding: 16px;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 650;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+        .waitlist-submit:hover {
+            background: var(--color-gray-800);
+        }
+        .waitlist-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            text-align: center;
+            animation: fadeInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .success-checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
         /* ============================================
            FOOTER
            ============================================ */
@@ -900,12 +1104,10 @@
             color: var(--color-gray-400);
             font-size: 0.875rem;
         }
-
         .footer-brand {
             font-weight: 600;
             color: var(--color-black);
         }
-
         /* ============================================
            RESPONSIVE
            ============================================ */
@@ -920,8 +1122,25 @@
                 padding: 8px 12px;
                 font-size: 0.82rem;
             }
+            .docs-container {
+                grid-template-columns: 1fr;
+            }
+            .docs-sidebar {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 20px 24px;
+            }
+            .docs-group {
+                flex-direction: row;
+                align-items: center;
+            }
+            .docs-group-title {
+                margin-bottom: 0;
+                margin-right: 12px;
+            }
         }
-
         @media (max-width: 768px) {
             .nav-center {
                 display: none;
@@ -936,16 +1155,24 @@
                 flex-direction: column;
                 padding: 32px;
             }
+            .workspace-body {
+                grid-template-columns: 1fr;
+            }
+            .workspace-sidebar {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 12px;
+            }
         }
     </style>
 </head>
 <body>
-
     <!-- =============================================
          PARTICLE CANVAS
          ============================================= -->
     <canvas id="particle-canvas"></canvas>
-
     <!-- =============================================
          NAVIGATION BAR
          ============================================= -->
@@ -959,7 +1186,6 @@
             </div>
             <span class="nav-brand">AlperinoAI</span>
         </a>
-
         <!-- Center: Nav Links -->
         <div class="nav-center">
             <!-- Products (with dropdown) -->
@@ -994,7 +1220,6 @@
                     </a>
                 </div>
             </div>
-
             <!-- Use Cases (with dropdown) -->
             <div class="nav-item">
                 <a href="#use-cases" class="nav-link" id="nav-use-cases">
@@ -1004,21 +1229,21 @@
                     </svg>
                 </a>
                 <div class="dropdown" id="dropdown-use-cases">
-                    <a href="#" class="dropdown-link" data-modal="gaming-simulators">
+                    <a href="#" class="dropdown-link" data-tab-link="tab-gaming">
                         <div class="dd-icon">🎮</div>
                         <div class="dd-text">
                             Gaming Simulators
                             <span>AI-driven game environments</span>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-link" data-modal="content-creators">
+                    <a href="#" class="dropdown-link" data-tab-link="tab-content">
                         <div class="dd-icon">🎬</div>
                         <div class="dd-text">
                             Content Creators
                             <span>Creative production tools</span>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-link" data-modal="local-deployment">
+                    <a href="#" class="dropdown-link" data-tab-link="tab-local">
                         <div class="dd-icon">🏠</div>
                         <div class="dd-text">
                             Local Deployment
@@ -1027,13 +1252,10 @@
                     </a>
                 </div>
             </div>
-
             <!-- Pricing (standard link) -->
             <a href="#pricing" class="nav-link" id="nav-pricing">Pricing</a>
-
             <!-- Blog (standard link) -->
             <a href="#blog" class="nav-link" id="nav-blog">Blog</a>
-
             <!-- Resources (with dropdown) -->
             <div class="nav-item">
                 <a href="#" class="nav-link" id="nav-resources">
@@ -1043,7 +1265,7 @@
                     </svg>
                 </a>
                 <div class="dropdown" id="dropdown-resources">
-                    <a href="#" class="dropdown-link" data-modal="documentation">
+                    <a href="#docs" class="dropdown-link" data-doc-link="doc-installation">
                         <div class="dd-icon">📄</div>
                         <div class="dd-text">
                             Documentation
@@ -1060,7 +1282,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Right: Download CTA -->
         <div class="nav-right">
             <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1"
@@ -1070,7 +1291,6 @@
             </a>
         </div>
     </nav>
-
     <!-- =============================================
          HERO SECTION
          ============================================= -->
@@ -1084,17 +1304,14 @@
                 Get it now →
             </a>
         </div>
-
         <!-- Hero Title -->
         <h1 class="hero-title" id="hero-title">
             Experience liftoff with the next&#8209;gen agent platform
         </h1>
-
         <!-- Subtitle -->
         <p class="hero-subtitle" id="hero-subtitle">
             AlperinoAI supercharges your workflow with intelligent agents that automate, create, and integrate — so you can focus on what matters.
         </p>
-
         <!-- CTA Buttons -->
         <div class="hero-actions" id="hero-actions">
             <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1"
@@ -1114,48 +1331,99 @@
             </a>
         </div>
     </main>
-
     <!-- =============================================
          PRODUCTS SECTION
          ============================================= -->
     <section class="section" id="products">
         <span class="section-tag">Powerful Engine</span>
         <h2 class="section-title">Fully integrated agent core</h2>
+        <p class="section-subtitle">AlperinoAI offers a robust local operating stack designed to run autonomous reasoning, integrations, and tools with extreme privacy.</p>
+        
         <div class="grid-products">
             <div class="card-product" data-modal="ai-agent-core">
                 <div class="card-icon">🤖</div>
                 <h3 class="card-title">AI Agent Core</h3>
                 <p class="card-desc">Autonomous engine with robust reasoning capabilities. Built for asynchronous long-running task executions.</p>
-                <span class="card-cta">Learn more <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                <span class="card-cta">Explore features <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
             </div>
             <div class="card-product" data-modal="rinoos-interface">
                 <div class="card-icon">🖥️</div>
                 <h3 class="card-title">RinoOS Interface</h3>
                 <p class="card-desc">Control center workspace designed to manage, monitor, and program complex agents from a unified control panel.</p>
-                <span class="card-cta">Learn more <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                <span class="card-cta">View workspace <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
             </div>
             <div class="card-product" data-modal="automations">
                 <div class="card-icon">⚡</div>
                 <h3 class="card-title">Automations</h3>
                 <p class="card-desc">Robust workflow connectors allowing seamless integration with databases, terminal systems, and external APIs.</p>
-                <span class="card-cta">Learn more <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                <span class="card-cta">Connect systems <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
             </div>
         </div>
     </section>
-
+    <!-- =============================================
+         INTERACTIVE RinoOS WORKSPACE
+         ============================================= -->
+    <section class="section">
+        <span class="section-tag">Interactive Preview</span>
+        <h2 class="section-title">Manage agents inside RinoOS</h2>
+        <p class="section-subtitle">Test out the RinoOS Dashboard interface mock below. Trigger automations, toggle active systems, and check real-time telemetry details.</p>
+        
+        <div class="workspace-container">
+            <div class="workspace-header">
+                <div class="workspace-dots">
+                    <div class="workspace-dot red"></div>
+                    <div class="workspace-dot yellow"></div>
+                    <div class="workspace-dot green"></div>
+                </div>
+                <div class="workspace-title">RinoOS_Console v1.5.0</div>
+                <div class="workspace-actions">
+                    <button class="workspace-btn" id="ws-trigger-action">Trigger Task</button>
+                    <button class="workspace-btn secondary" id="ws-toggle-system">Pause Agents</button>
+                </div>
+            </div>
+            <div class="workspace-body">
+                <div class="workspace-sidebar">
+                    <div class="sidebar-item active" data-ws-tab="telemetry">📈 System Stats</div>
+                    <div class="sidebar-item" data-ws-tab="agents">🤖 Active Cores</div>
+                    <div class="sidebar-item" data-ws-tab="history">📂 Job Logs</div>
+                </div>
+                <div class="workspace-content">
+                    <div class="workspace-stats" id="ws-tab-content-stats">
+                        <div class="stat-card">
+                            <span class="stat-label">Active Core CPU</span>
+                            <span class="stat-val" id="cpu-val">12.4%</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Local RAM Usage</span>
+                            <span class="stat-val" id="ram-val">4.2 GB</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">System Tasks</span>
+                            <span class="stat-val" id="tasks-val">87 / 87</span>
+                        </div>
+                    </div>
+                    <div class="workspace-logs" id="workspace-log-box">
+                        <div class="log-line"><span class="log-time">[16:20:05]</span><span class="log-txt">RinoOS pipeline starting up...</span></div>
+                        <div class="log-line"><span class="log-time">[16:20:06]</span><span class="log-txt">Loading local neural inference configurations...</span></div>
+                        <div class="log-line"><span class="log-time">[16:20:07]</span><span class="log-txt">Local cores listening on localhost:8080</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- =============================================
          USE CASES SECTION
          ============================================= -->
     <section class="section" id="use-cases">
         <span class="section-tag">Infinite Potential</span>
         <h2 class="section-title">Designed for modern workflows</h2>
+        <p class="section-subtitle">AlperinoAI is flexible, scaling from gaming simulator automation to content creator scripts and local system hosting.</p>
         
         <div class="use-cases-tabs">
             <button class="tab-btn active" data-tab="tab-gaming">Gaming Simulators</button>
             <button class="tab-btn" data-tab="tab-content">Content Creators</button>
             <button class="tab-btn" data-tab="tab-local">Local Deployment</button>
         </div>
-
         <div class="tab-content-container">
             <div class="tab-text" id="tab-content-text">
                 <h3 class="tab-title">Gaming Simulators</h3>
@@ -1169,13 +1437,44 @@
             <div class="tab-visual" id="tab-content-visual">🎮</div>
         </div>
     </section>
-
+    <!-- =============================================
+         DOCUMENTATION HUBS
+         ============================================= -->
+    <section class="section" id="docs">
+        <span class="section-tag">Developer Guides</span>
+        <h2 class="section-title">Built for builders</h2>
+        <p class="section-subtitle">Get started with installation configs, system setups, and local terminal connections.</p>
+        
+        <div class="docs-container">
+            <div class="docs-sidebar">
+                <div class="docs-group">
+                    <span class="docs-group-title">Getting Started</span>
+                    <a class="docs-item active" data-doc="doc-installation">CLI Installation</a>
+                    <a class="docs-item" data-doc="doc-configuration">Agent Configuration</a>
+                </div>
+                <div class="docs-group">
+                    <span class="docs-group-title">Core APIs</span>
+                    <a class="docs-item" data-doc="doc-inference">Local Inference</a>
+                    <a class="docs-item" data-doc="doc-integrations">Custom Integrations</a>
+                </div>
+            </div>
+            <div class="docs-content">
+                <h3 class="docs-title" id="docs-title-el">CLI Installation</h3>
+                <div class="docs-body" id="docs-body-el">
+                    <p>To run the next-generation agent core on your local machine, download the CLI engine and execute the bootstrap script:</p>
+                    <div class="docs-code">npm install -g @alperinoai/cli<br>alperino bootstrap --local</div>
+                    <p>The bootstrap utility compiles configurations and sets up local database clusters automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- =============================================
          PRICING SECTION
          ============================================= -->
     <section class="section" id="pricing">
         <span class="section-tag">Simple Pricing</span>
         <h2 class="section-title">Flexible options for all teams</h2>
+        <p class="section-subtitle">Get started with our free local tier, or join the waiting list for our managed cloud platforms.</p>
         
         <div class="pricing-grid">
             <div class="pricing-card">
@@ -1189,7 +1488,6 @@
                 </ul>
                 <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1" class="btn-pricing outline">Get Started</a>
             </div>
-
             <div class="pricing-card premium">
                 <span class="pricing-name">Professional</span>
                 <div class="pricing-price">$29 <span>/ month</span></div>
@@ -1200,17 +1498,17 @@
                     <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Local &amp; cloud inference</li>
                     <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Priority developer support</li>
                 </ul>
-                <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1" class="btn-pricing solid">Upgrade Now</a>
+                <button class="btn-pricing solid" id="btn-pricing-pro">Join waitlist</button>
             </div>
         </div>
     </section>
-
     <!-- =============================================
          BLOG SECTION
          ============================================= -->
     <section class="section" id="blog">
         <span class="section-tag">Latest Updates</span>
         <h2 class="section-title">From the AlperinoAI blog</h2>
+        <p class="section-subtitle">Stay up-to-date with technical releases, local setup guides, and industry news.</p>
         
         <div class="grid-products">
             <div class="card-product" data-modal="blog-v15">
@@ -1227,7 +1525,6 @@
             </div>
         </div>
     </section>
-
     <!-- =============================================
          GLOBAL DETAIL MODAL
          ============================================= -->
@@ -1242,7 +1539,34 @@
             <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1" class="modal-btn">Download SDK</a>
         </div>
     </div>
-
+    <!-- =============================================
+         WAITLIST / COMING SOON MODAL
+         ============================================= -->
+    <div class="modal-overlay" id="waitlist-modal">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="waitlist-close">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            
+            <!-- Default Form View -->
+            <div id="waitlist-content-default">
+                <div class="modal-icon">🚀</div>
+                <h3 class="modal-title">Professional Plan — Coming Soon</h3>
+                <p class="modal-desc">We are actively refining our managed cloud infrastructure. Join the early-access waitlist today to lock in your discounted launch rate.</p>
+                <form class="waitlist-form" id="waitlist-form-el">
+                    <input type="email" class="waitlist-input" placeholder="Enter your email address" required id="waitlist-email">
+                    <button type="submit" class="waitlist-submit">Join the Waitlist</button>
+                </form>
+            </div>
+            <!-- Success Message View -->
+            <div class="waitlist-success" id="waitlist-content-success">
+                <div class="success-checkmark">✓</div>
+                <h3 class="modal-title">You're on the list!</h3>
+                <p class="modal-desc">Thank you for your interest. We will email you early access credentials as soon as cloud deployments become active.</p>
+                <button class="modal-btn" id="waitlist-success-done">Done</button>
+            </div>
+        </div>
+    </div>
     <!-- =============================================
          FOOTER
          ============================================= -->
@@ -1254,23 +1578,19 @@
             Widescreen Desktop Experience
         </div>
     </footer>
-
     <!-- =============================================
          PARTICLE CANVAS SCRIPT
          ============================================= -->
     <script>
         (function () {
             'use strict';
-
             const canvas = document.getElementById('particle-canvas');
             const ctx = canvas.getContext('2d');
-
             let width, height, centerX, centerY;
             let particles = [];
             let animId;
             const PARTICLE_COUNT = 260;
             const MAX_CONNECT_DIST = 140;
-
             const colorStops = [
                 { r: 79,  g: 70,  b: 229 },
                 { r: 99,  g: 102, b: 241 },
@@ -1280,7 +1600,6 @@
                 { r: 251, g: 146, b: 60  },
                 { r: 251, g: 113, b: 133 },
             ];
-
             function lerpColor(t) {
                 t = Math.max(0, Math.min(1, t));
                 const idx = t * (colorStops.length - 1);
@@ -1293,57 +1612,45 @@
                     b: Math.round(colorStops[lo].b + (colorStops[hi].b - colorStops[lo].b) * f),
                 };
             }
-
             function resize() {
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = window.innerHeight;
                 centerX = width / 2;
                 centerY = height / 2;
             }
-
             class Particle {
                 constructor() {
                     this.reset();
                 }
-
                 reset() {
                     const angle = Math.random() * Math.PI * 2;
                     const maxRadius = Math.max(width, height) * 0.55;
                     const radius = Math.random() * maxRadius;
-
                     this.x = centerX + Math.cos(angle) * radius;
                     this.y = centerY + Math.sin(angle) * radius;
                     this.baseRadius = 1 + Math.random() * 2.2;
                     this.radius = this.baseRadius;
-
                     const speed = 0.08 + Math.random() * 0.2;
                     this.vx = Math.cos(angle) * speed + (Math.random() - 0.5) * 0.15;
                     this.vy = Math.sin(angle) * speed + (Math.random() - 0.5) * 0.15;
-
                     this.distNorm = radius / maxRadius;
-
                     this.alpha = 0.15 + Math.random() * 0.45;
                     this.pulsePhase = Math.random() * Math.PI * 2;
                     this.pulseSpeed = 0.008 + Math.random() * 0.015;
                 }
-
                 update() {
                     this.x += this.vx;
                     this.y += this.vy;
-
                     this.pulsePhase += this.pulseSpeed;
                     this.radius = this.baseRadius * (0.85 + 0.3 * Math.sin(this.pulsePhase));
-
                     const dx = this.x - centerX;
                     const dy = this.y - centerY;
                     const maxRadius = Math.max(width, height) * 0.55;
                     this.distNorm = Math.sqrt(dx * dx + dy * dy) / maxRadius;
-
                     if (this.x < -60 || this.x > width + 60 || this.y < -60 || this.y > height + 60) {
                         this.reset();
                     }
                 }
-
                 draw() {
                     const c = lerpColor(this.distNorm);
                     ctx.beginPath();
@@ -1352,31 +1659,26 @@
                     ctx.fill();
                 }
             }
-
             function initParticles() {
                 particles = [];
                 for (let i = 0; i < PARTICLE_COUNT; i++) {
                     particles.push(new Particle());
                 }
             }
-
             function drawConnections() {
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const distSq = dx * dx + dy * dy;
-
                         if (distSq < MAX_CONNECT_DIST * MAX_CONNECT_DIST) {
                             const dist = Math.sqrt(distSq);
                             const alpha = (1 - dist / MAX_CONNECT_DIST) * 0.12;
-
                             const ci = lerpColor(particles[i].distNorm);
                             const cj = lerpColor(particles[j].distNorm);
                             const r = Math.round((ci.r + cj.r) / 2);
                             const g = Math.round((ci.g + cj.g) / 2);
                             const b = Math.round((ci.b + cj.b) / 2);
-
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
@@ -1387,25 +1689,20 @@
                     }
                 }
             }
-
             let mouseX = -9999, mouseY = -9999;
             document.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
             });
-
             function animateWithMouse() {
                 ctx.clearRect(0, 0, width, height);
-
                 const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(width, height) * 0.6);
                 grad.addColorStop(0, 'rgba(255,255,255,0)');
                 grad.addColorStop(0.7, 'rgba(255,255,255,0)');
                 grad.addColorStop(1, 'rgba(255,255,255,0.6)');
                 ctx.fillStyle = grad;
                 ctx.fillRect(0, 0, width, height);
-
                 drawConnections();
-
                 for (const p of particles) {
                     const dx = p.x - mouseX;
                     const dy = p.y - mouseY;
@@ -1415,26 +1712,20 @@
                         p.x += (dx / dist) * force;
                         p.y += (dy / dist) * force;
                     }
-
                     p.update();
                     p.draw();
                 }
-
                 animId = requestAnimationFrame(animateWithMouse);
             }
-
             resize();
             initParticles();
             animateWithMouse();
-
             window.addEventListener('resize', () => {
                 resize();
                 initParticles();
             });
-
         })();
     </script>
-
     <!-- =============================================
          INTERACTIVE COMPONENT SCRIPTS
          ============================================= -->
@@ -1456,30 +1747,10 @@
                 title: 'Automations',
                 desc: 'Seamless pipeline links designed to trigger actions. Hook up database processes, terminal scripting engines, files, or external webhook APIs. Set automated schedules and event-driven hooks easily.'
             },
-            'gaming-simulators': {
-                icon: '🎮',
-                title: 'Gaming Simulators',
-                desc: 'Perfect simulator integrations for AI gameplay and testing. Hook AlperinoAI to virtual game worlds or sandbox environments to test strategy models, train systems, and generate complex decision cycles.'
-            },
-            'content-creators': {
-                icon: '🎬',
-                title: 'Content Creators',
-                desc: 'Tools designed for media production workflows. Build automated content templates, media organization structures, prompt lists, and multi-step media pipeline processing.'
-            },
-            'local-deployment': {
-                icon: '🏠',
-                title: 'Local Deployment',
-                desc: 'Privacy-first agent structures. Deploy AlperinoAI directly inside local system containers. Run offline inference models securely without sending any code or prompts to external servers.'
-            },
-            'documentation': {
-                icon: '📄',
-                title: 'Documentation',
-                desc: 'Explore comprehensive quickstart tutorials, developer guides, system API references, configuration structures, and sample templates to help you run AlperinoAI within minutes.'
-            },
             'github-repo': {
                 icon: '🐙',
-                title: 'GitHub Repo',
-                desc: 'Join the community open-source repository. Explore contributor resources, file pull requests, log bugs, and inspect updates for the AlperinoAI platform directly.'
+                title: 'GitHub Repository',
+                desc: 'Explore the open source developer builds on GitHub. Contribute to pipelines, fork modules, test the code, and view release notes directly inside our open repo. Start building the next-gen agent engine with us.'
             },
             'blog-v15': {
                 icon: '🚀',
@@ -1492,7 +1763,6 @@
                 desc: 'In this article, we outline why on-premise execution is critical for enterprise security. Local models eliminate third-party data collection while saving thousands in server API processing fees.'
             }
         };
-
         // --- Use Case Tab Content Mapping ---
         const tabData = {
             'tab-gaming': {
@@ -1526,28 +1796,54 @@
                 visual: '🏠'
             }
         };
-
+        // --- Documentation Data ---
+        const docData = {
+            'doc-installation': {
+                title: 'CLI Installation',
+                body: `
+                    <p>To run the next-generation agent core on your local machine, download the CLI engine and execute the bootstrap script:</p>
+                    <div class="docs-code">npm install -g @alperinoai/cli<br>alperino bootstrap --local</div>
+                    <p>The bootstrap utility compiles configurations and sets up local database clusters automatically.</p>
+                `
+            },
+            'doc-configuration': {
+                title: 'Agent Configuration',
+                body: `
+                    <p>Setup agent roles using declarative JSON structures. Define reasoning modules, token parameters, and integration boundaries:</p>
+                    <div class="docs-code">{<br>&nbsp;&nbsp;"agent_name": "LocalReasoner",<br>&nbsp;&nbsp;"model": "llama-3-local",<br>&nbsp;&nbsp;"permissions": ["fs-read", "http-get"]<br>}</div>
+                `
+            },
+            'doc-inference': {
+                title: 'Local Inference',
+                body: `
+                    <p>AlperinoAI utilizes hardware-accelerated local inference pipelines to run models directly on local cores (compatible with GPU and NPU architectures):</p>
+                    <div class="docs-code">alperino model download llama-3-8b<br>alperino serve --port 8080</div>
+                `
+            },
+            'doc-integrations': {
+                title: 'Custom Integrations',
+                body: `
+                    <p>Connect your agent workflows to custom tools using simple JavaScript API hooks. Register systems easily:</p>
+                    <div class="docs-code">const agent = require('@alperinoai/core');<br>agent.registerTool('send_log', (args) => { ... });</div>
+                `
+            }
+        };
         // --- Interactive Tabs ---
         const tabButtons = document.querySelectorAll('.tab-btn');
         const tabTextTitle = document.querySelector('.tab-title');
         const tabTextDesc = document.querySelector('.tab-desc');
         const tabTextList = document.querySelector('.tab-list');
         const tabVisual = document.querySelector('.tab-visual');
-
         tabButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 tabButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const dataKey = btn.getAttribute('data-tab');
                 const info = tabData[dataKey];
-
                 if (info) {
                     tabTextTitle.textContent = info.title;
                     tabTextDesc.textContent = info.desc;
                     tabVisual.textContent = info.visual;
-
-                    // Rebuild bullets list
                     tabTextList.innerHTML = '';
                     info.bullets.forEach(bullet => {
                         const li = document.createElement('li');
@@ -1557,14 +1853,52 @@
                 }
             });
         });
-
+        // --- Dropdown to Tab Redirect ---
+        document.querySelectorAll('[data-tab-link]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabKey = el.getAttribute('data-tab-link');
+                const tabTarget = document.querySelector(`[data-tab="${tabKey}"]`);
+                if (tabTarget) {
+                    document.getElementById('use-cases').scrollIntoView({ behavior: 'smooth' });
+                    tabTarget.click();
+                }
+            });
+        });
+        // --- Interactive Documentation ---
+        const docItems = document.querySelectorAll('.docs-item');
+        const docsTitleEl = document.getElementById('docs-title-el');
+        const docsBodyEl = document.getElementById('docs-body-el');
+        docItems.forEach(item => {
+            item.addEventListener('click', () => {
+                docItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                const docKey = item.getAttribute('data-doc');
+                const doc = docData[docKey];
+                if (doc) {
+                    docsTitleEl.textContent = doc.title;
+                    docsBodyEl.innerHTML = doc.body;
+                }
+            });
+        });
+        // --- Dropdown to Doc Redirect ---
+        document.querySelectorAll('[data-doc-link]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const docKey = el.getAttribute('data-doc-link');
+                const docTarget = document.querySelector(`[data-doc="${docKey}"]`);
+                if (docTarget) {
+                    document.getElementById('docs').scrollIntoView({ behavior: 'smooth' });
+                    docTarget.click();
+                }
+            });
+        });
         // --- Interactive Modals ---
         const modalOverlay = document.getElementById('detail-modal');
         const modalIcon = document.getElementById('modal-icon');
         const modalTitle = document.getElementById('modal-title');
         const modalDesc = document.getElementById('modal-desc');
         const modalClose = document.getElementById('modal-close');
-
         function openModal(key) {
             const data = modalData[key];
             if (data) {
@@ -1574,12 +1908,9 @@
                 modalOverlay.classList.add('open');
             }
         }
-
         function closeModal() {
             modalOverlay.classList.remove('open');
         }
-
-        // Hook click events to elements with data-modal attribute
         document.querySelectorAll('[data-modal]').forEach(el => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1587,21 +1918,133 @@
                 openModal(key);
             });
         });
-
         modalClose.addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) {
                 closeModal();
             }
         });
-
-        // Close on escape key
+        // --- Waitlist Modal for Professional Plan (Coming Soon) ---
+        const waitlistModal = document.getElementById('waitlist-modal');
+        const btnPricingPro = document.getElementById('btn-pricing-pro');
+        const waitlistClose = document.getElementById('waitlist-close');
+        const waitlistForm = document.getElementById('waitlist-form-el');
+        const waitlistContentDefault = document.getElementById('waitlist-content-default');
+        const waitlistContentSuccess = document.getElementById('waitlist-content-success');
+        const waitlistSuccessDone = document.getElementById('waitlist-success-done');
+        function openWaitlist() {
+            waitlistContentDefault.style.display = 'block';
+            waitlistContentSuccess.style.display = 'none';
+            waitlistModal.classList.add('open');
+        }
+        function closeWaitlist() {
+            waitlistModal.classList.remove('open');
+        }
+        btnPricingPro.addEventListener('click', (e) => {
+            e.preventDefault();
+            openWaitlist();
+        });
+        waitlistClose.addEventListener('click', closeWaitlist);
+        waitlistSuccessDone.addEventListener('click', closeWaitlist);
+        waitlistModal.addEventListener('click', (e) => {
+            if (e.target === waitlistModal) {
+                closeWaitlist();
+            }
+        });
+        waitlistForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = document.getElementById('waitlist-email').value;
+            if (emailInput) {
+                waitlistContentDefault.style.display = 'none';
+                waitlistContentSuccess.style.display = 'flex';
+                document.getElementById('waitlist-email').value = '';
+            }
+        });
+        // Close all modals on Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeModal();
+                closeWaitlist();
             }
         });
+        // =============================================
+        // RinoOS INTERACTIVE WORKSPACE MOCK SCRIPT
+        // =============================================
+        const wsTriggerAction = document.getElementById('ws-trigger-action');
+        const wsToggleSystem = document.getElementById('ws-toggle-system');
+        const wsLogBox = document.getElementById('workspace-log-box');
+        const wsSidebarItems = document.querySelectorAll('[data-ws-tab]');
+        const wsTabContentStats = document.getElementById('ws-tab-content-stats');
+        let isSystemActive = true;
+        let logInterval;
+        function addLog(text) {
+            const time = new Date().toLocaleTimeString();
+            const logLine = document.createElement('div');
+            logLine.className = 'log-line';
+            logLine.innerHTML = `<span class="log-time">[${time}]</span><span class="log-txt">${text}</span>`;
+            wsLogBox.appendChild(logLine);
+            wsLogBox.scrollTop = wsLogBox.scrollHeight;
+        }
+        // Add periodic logs to RinoOS
+        function startLogging() {
+            logInterval = setInterval(() => {
+                if (isSystemActive) {
+                    const cpu = (Math.random() * 20 + 5).toFixed(1);
+                    const ram = (Math.random() * 1.5 + 3.5).toFixed(1);
+                    document.getElementById('cpu-val').textContent = `${cpu}%`;
+                    document.getElementById('ram-val').textContent = `${ram} GB`;
+                    const randomLogs = [
+                        "Analyzing database query pipelines...",
+                        "Synchronizing core-reasoner state...",
+                        "Optimizing token sequence processing...",
+                        "Auto-scaling worker node processes...",
+                        "Checking health statuses of local threads..."
+                    ];
+                    const selectedLog = randomLogs[Math.floor(Math.random() * randomLogs.length)];
+                    addLog(selectedLog);
+                }
+            }, 3500);
+        }
+        wsTriggerAction.addEventListener('click', () => {
+            if (isSystemActive) {
+                addLog("ACTION TRIGGERED: Initiating system verification run...");
+                setTimeout(() => {
+                    addLog("VERIFICATION SUCCESS: All local models operating within boundary limits.");
+                }, 1000);
+            } else {
+                alert("Please resume agents to trigger tasks.");
+            }
+        });
+        wsToggleSystem.addEventListener('click', () => {
+            isSystemActive = !isSystemActive;
+            if (isSystemActive) {
+                wsToggleSystem.textContent = "Pause Agents";
+                wsToggleSystem.classList.remove('secondary');
+                addLog("SYSTEM RESUMED: All local agents started listening.");
+            } else {
+                wsToggleSystem.textContent = "Resume Agents";
+                wsToggleSystem.classList.add('secondary');
+                addLog("SYSTEM PAUSED: Halted worker nodes and agent cores.");
+            }
+        });
+        wsSidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
+                wsSidebarItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                const tab = item.getAttribute('data-ws-tab');
+                if (tab === 'telemetry') {
+                    wsTabContentStats.style.display = 'grid';
+                    addLog("Viewed telemetry dashboard");
+                } else if (tab === 'agents') {
+                    wsTabContentStats.style.display = 'none';
+                    addLog("Displaying active cores: [core-reasoner: ONLINE, vision-parser: ONLINE, executor: IDLE]");
+                } else if (tab === 'history') {
+                    wsTabContentStats.style.display = 'none';
+                    addLog("Exported latest job logs summary successfully.");
+                }
+            });
+        });
+        startLogging();
     </script>
-
 </body>
 </html>
