@@ -43,6 +43,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -294,7 +295,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            min-height: 90vh;
             padding: calc(var(--nav-height) + 40px) 40px 80px;
             text-align: center;
         }
@@ -451,41 +452,462 @@
         }
 
         /* ============================================
-           ANIMATIONS
+           CONTENT SECTIONS
            ============================================ */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .section {
+            position: relative;
+            z-index: 2;
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* ============================================
-           SCROLLBAR
-           ============================================ */
-        ::-webkit-scrollbar {
-            width: 6px;
+        .section-tag {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--color-gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 16px;
         }
 
-        ::-webkit-scrollbar-track {
+        .section-title {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--color-black);
+            margin-bottom: 64px;
+            text-align: center;
+        }
+
+        /* --- Products Grid --- */
+        .grid-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            width: 100%;
+        }
+
+        .card-product {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            cursor: pointer;
+            transition: background var(--transition-medium), border-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
+        }
+
+        .card-product:hover {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.16);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--color-gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-fast);
+        }
+
+        .card-product:hover .card-icon {
+            background: var(--color-gray-200);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--color-gray-500);
+            line-height: 1.6;
+        }
+
+        .card-cta {
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+            color: var(--color-black);
+            transition: color var(--transition-fast);
+        }
+
+        .card-cta svg {
+            transition: transform var(--transition-fast);
+        }
+
+        .card-product:hover .card-cta svg {
+            transform: translateX(3px);
+        }
+
+        /* --- Interactive Use Cases (Tabs) --- */
+        .use-cases-tabs {
+            display: flex;
+            gap: 8px;
+            background: var(--color-gray-100);
+            padding: 6px;
+            border-radius: 100px;
+            margin-bottom: 48px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-gray-500);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: background var(--transition-fast), color var(--transition-fast);
+        }
+
+        .tab-btn.active {
+            background: var(--color-white);
+            color: var(--color-black);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .tab-content-container {
+            width: 100%;
+            min-height: 380px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 32px;
+            padding: 48px;
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .tab-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tab-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .tab-desc {
+            font-size: 1.05rem;
+            color: var(--color-gray-500);
+            line-height: 1.65;
+        }
+
+        .tab-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .tab-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-gray-700);
+        }
+
+        .tab-list li svg {
+            color: #22c55e;
+            flex-shrink: 0;
+        }
+
+        .tab-visual {
+            flex: 1;
+            background: var(--color-gray-50);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 20px;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
+            opacity: 0.6;
+        }
+
+        /* --- Pricing Section --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 28px;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: relative;
+            transition: transform var(--transition-medium), background var(--transition-medium), border-color var(--transition-medium);
+        }
+
+        .pricing-card.premium {
+            background: var(--color-white);
+            border: 2px solid var(--color-black);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .pricing-card.premium::before {
+            content: 'Recommended';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 4px 16px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .pricing-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-gray-500);
+        }
+
+        .pricing-card.premium .pricing-name {
+            color: var(--color-black);
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-gray-400);
+        }
+
+        .pricing-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 16px 0;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--color-gray-600);
+        }
+
+        .pricing-features li svg {
+            color: var(--color-black);
+        }
+
+        .btn-pricing {
+            width: 100%;
+            padding: 14px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .btn-pricing.outline {
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            color: var(--color-black);
             background: transparent;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--color-gray-300);
-            border-radius: 100px;
+        .btn-pricing.outline:hover {
+            background: var(--color-gray-100);
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--color-gray-400);
+        .btn-pricing.solid {
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+        }
+
+        .btn-pricing.solid:hover {
+            background: var(--color-gray-800);
         }
 
         /* ============================================
-           RESPONSIVE (safety — still desktop-first)
+           GLOBAL INTERACTIVE DETAIL MODAL
+           ============================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(10, 10, 10, 0.2);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity var(--transition-medium), visibility var(--transition-medium);
+            padding: 24px;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: var(--color-white);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
+            transform: scale(0.95);
+            transition: transform var(--transition-medium);
+            position: relative;
+        }
+
+        .modal-overlay.open .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--color-gray-100);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+
+        .modal-close-btn:hover {
+            background: var(--color-gray-200);
+        }
+
+        .modal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 850;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .modal-desc {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.65;
+            margin-bottom: 32px;
+        }
+
+        .modal-btn {
+            width: 100%;
+            display: block;
+            text-align: center;
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 16px;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background var(--transition-fast);
+        }
+
+        .modal-btn:hover {
+            background: var(--color-gray-800);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 48px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--color-gray-400);
+            font-size: 0.875rem;
+        }
+
+        .footer-brand {
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        /* ============================================
+           RESPONSIVE
            ============================================ */
         @media (max-width: 1024px) {
             .navbar {
@@ -509,6 +931,10 @@
             }
             .hero-actions {
                 flex-direction: column;
+            }
+            .tab-content-container {
+                flex-direction: column;
+                padding: 32px;
             }
         }
     </style>
@@ -538,28 +964,28 @@
         <div class="nav-center">
             <!-- Products (with dropdown) -->
             <div class="nav-item">
-                <a href="#" class="nav-link" id="nav-products">
+                <a href="#products" class="nav-link" id="nav-products">
                     Products
                     <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
                 <div class="dropdown" id="dropdown-products">
-                    <a href="#" class="dropdown-link" id="link-ai-agent-core">
+                    <a href="#" class="dropdown-link" data-modal="ai-agent-core">
                         <div class="dd-icon">🤖</div>
                         <div class="dd-text">
                             AI Agent Core
                             <span>Autonomous intelligence engine</span>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-link" id="link-rinoos-interface">
+                    <a href="#" class="dropdown-link" data-modal="rinoos-interface">
                         <div class="dd-icon">🖥️</div>
                         <div class="dd-text">
                             RinoOS Interface
                             <span>Next-gen operating layer</span>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-link" id="link-automations">
+                    <a href="#" class="dropdown-link" data-modal="automations">
                         <div class="dd-icon">⚡</div>
                         <div class="dd-text">
                             Automations
@@ -571,28 +997,28 @@
 
             <!-- Use Cases (with dropdown) -->
             <div class="nav-item">
-                <a href="#" class="nav-link" id="nav-use-cases">
+                <a href="#use-cases" class="nav-link" id="nav-use-cases">
                     Use Cases
                     <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
                 <div class="dropdown" id="dropdown-use-cases">
-                    <a href="#" class="dropdown-link" id="link-gaming-simulators">
+                    <a href="#" class="dropdown-link" data-modal="gaming-simulators">
                         <div class="dd-icon">🎮</div>
                         <div class="dd-text">
                             Gaming Simulators
                             <span>AI-driven game environments</span>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-link" id="link-content-creators">
+                    <a href="#" class="dropdown-link" data-modal="content-creators">
                         <div class="dd-icon">🎬</div>
                         <div class="dd-text">
                             Content Creators
                             <span>Creative production tools</span>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-link" id="link-local-deployment">
+                    <a href="#" class="dropdown-link" data-modal="local-deployment">
                         <div class="dd-icon">🏠</div>
                         <div class="dd-text">
                             Local Deployment
@@ -603,10 +1029,10 @@
             </div>
 
             <!-- Pricing (standard link) -->
-            <a href="#" class="nav-link" id="nav-pricing">Pricing</a>
+            <a href="#pricing" class="nav-link" id="nav-pricing">Pricing</a>
 
             <!-- Blog (standard link) -->
-            <a href="#" class="nav-link" id="nav-blog">Blog</a>
+            <a href="#blog" class="nav-link" id="nav-blog">Blog</a>
 
             <!-- Resources (with dropdown) -->
             <div class="nav-item">
@@ -617,14 +1043,14 @@
                     </svg>
                 </a>
                 <div class="dropdown" id="dropdown-resources">
-                    <a href="#" class="dropdown-link" id="link-documentation">
+                    <a href="#" class="dropdown-link" data-modal="documentation">
                         <div class="dd-icon">📄</div>
                         <div class="dd-text">
                             Documentation
                             <span>Guides, API refs &amp; tutorials</span>
                         </div>
                     </a>
-                    <a href="#" class="dropdown-link" id="link-github-repo">
+                    <a href="#" class="dropdown-link" data-modal="github-repo">
                         <div class="dd-icon">🐙</div>
                         <div class="dd-text">
                             GitHub Repo
@@ -688,6 +1114,146 @@
             </a>
         </div>
     </main>
+
+    <!-- =============================================
+         PRODUCTS SECTION
+         ============================================= -->
+    <section class="section" id="products">
+        <span class="section-tag">Powerful Engine</span>
+        <h2 class="section-title">Fully integrated agent core</h2>
+        <div class="grid-products">
+            <div class="card-product" data-modal="ai-agent-core">
+                <div class="card-icon">🤖</div>
+                <h3 class="card-title">AI Agent Core</h3>
+                <p class="card-desc">Autonomous engine with robust reasoning capabilities. Built for asynchronous long-running task executions.</p>
+                <span class="card-cta">Learn more <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            </div>
+            <div class="card-product" data-modal="rinoos-interface">
+                <div class="card-icon">🖥️</div>
+                <h3 class="card-title">RinoOS Interface</h3>
+                <p class="card-desc">Control center workspace designed to manage, monitor, and program complex agents from a unified control panel.</p>
+                <span class="card-cta">Learn more <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            </div>
+            <div class="card-product" data-modal="automations">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">Automations</h3>
+                <p class="card-desc">Robust workflow connectors allowing seamless integration with databases, terminal systems, and external APIs.</p>
+                <span class="card-cta">Learn more <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         USE CASES SECTION
+         ============================================= -->
+    <section class="section" id="use-cases">
+        <span class="section-tag">Infinite Potential</span>
+        <h2 class="section-title">Designed for modern workflows</h2>
+        
+        <div class="use-cases-tabs">
+            <button class="tab-btn active" data-tab="tab-gaming">Gaming Simulators</button>
+            <button class="tab-btn" data-tab="tab-content">Content Creators</button>
+            <button class="tab-btn" data-tab="tab-local">Local Deployment</button>
+        </div>
+
+        <div class="tab-content-container">
+            <div class="tab-text" id="tab-content-text">
+                <h3 class="tab-title">Gaming Simulators</h3>
+                <p class="tab-desc">Run autonomous agents to simulate complex system mechanics, economic behaviors, or strategy games in isolated environments.</p>
+                <ul class="tab-list">
+                    <li><svg width="14" height="14" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Multi-agent economics simulation</li>
+                    <li><svg width="14" height="14" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Local model integration for complex strategy</li>
+                    <li><svg width="14" height="14" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Isolated environment testing sandbox</li>
+                </ul>
+            </div>
+            <div class="tab-visual" id="tab-content-visual">🎮</div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         PRICING SECTION
+         ============================================= -->
+    <section class="section" id="pricing">
+        <span class="section-tag">Simple Pricing</span>
+        <h2 class="section-title">Flexible options for all teams</h2>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <span class="pricing-name">Free Starter</span>
+                <div class="pricing-price">$0 <span>/ forever</span></div>
+                <p class="card-desc">Perfect for individual developers testing local models and pipelines.</p>
+                <ul class="pricing-features">
+                    <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> 1 Active Agent Core</li>
+                    <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> RinoOS local interface</li>
+                    <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Local model connections</li>
+                </ul>
+                <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1" class="btn-pricing outline">Get Started</a>
+            </div>
+
+            <div class="pricing-card premium">
+                <span class="pricing-name">Professional</span>
+                <div class="pricing-price">$29 <span>/ month</span></div>
+                <p class="card-desc">For advanced workflows requiring scalable task runners and agent monitoring.</p>
+                <ul class="pricing-features">
+                    <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Unlimited active agents</li>
+                    <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Full suite of integrations</li>
+                    <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Local &amp; cloud inference</li>
+                    <li><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Priority developer support</li>
+                </ul>
+                <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1" class="btn-pricing solid">Upgrade Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         BLOG SECTION
+         ============================================= -->
+    <section class="section" id="blog">
+        <span class="section-tag">Latest Updates</span>
+        <h2 class="section-title">From the AlperinoAI blog</h2>
+        
+        <div class="grid-products">
+            <div class="card-product" data-modal="blog-v15">
+                <span class="section-tag">June 15, 2026</span>
+                <h3 class="card-title">Introducing AlperinoAI v1.5</h3>
+                <p class="card-desc">Read about the new neural core performance gains and out-of-the-box local deployment features.</p>
+                <span class="card-cta">Read article <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            </div>
+            <div class="card-product" data-modal="blog-local">
+                <span class="section-tag">June 10, 2026</span>
+                <h3 class="card-title">The power of local inference</h3>
+                <p class="card-desc">Why running LLM agents locally on-premise provides maximum data privacy and cost-efficiency.</p>
+                <span class="card-cta">Read article <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================
+         GLOBAL DETAIL MODAL
+         ============================================= -->
+    <div class="modal-overlay" id="detail-modal">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="modal-close">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="modal-icon" id="modal-icon">🤖</div>
+            <h3 class="modal-title" id="modal-title">AI Agent Core</h3>
+            <p class="modal-desc" id="modal-desc">Detailed product description will go here.</p>
+            <a href="https://www.dropbox.com/scl/fi/1l1hrxfxmpt4vtvwehm1k/rinude_1.5v_setup.exe?rlkey=y345qc12h4uool8x0m71vxtvu&st=h2t4l24l&dl=1" class="modal-btn">Download SDK</a>
+        </div>
+    </div>
+
+    <!-- =============================================
+         FOOTER
+         ============================================= -->
+    <footer class="footer">
+        <div>
+            &copy; 2026 <span class="footer-brand">AlperinoAI</span>. All rights reserved.
+        </div>
+        <div>
+            Widescreen Desktop Experience
+        </div>
+    </footer>
 
     <!-- =============================================
          PARTICLE CANVAS SCRIPT
@@ -867,6 +1433,174 @@
             });
 
         })();
+    </script>
+
+    <!-- =============================================
+         INTERACTIVE COMPONENT SCRIPTS
+         ============================================= -->
+    <script>
+        // --- Modal Content Mapping ---
+        const modalData = {
+            'ai-agent-core': {
+                icon: '🤖',
+                title: 'AI Agent Core',
+                desc: 'The powerful engine of AlperinoAI. Run autonomous decision-making agents with complex logic models on a local framework or connect dynamically to external API backends. Complete local configuration offers 100% data safety.'
+            },
+            'rinoos-interface': {
+                icon: '🖥️',
+                title: 'RinoOS Interface',
+                desc: 'A gorgeous control interface where you can monitor your running agent pipelines, control settings, inspect data flows in real-time, and run quick automated tasks. Pure minimalist design to boost coding efficiency.'
+            },
+            'automations': {
+                icon: '⚡',
+                title: 'Automations',
+                desc: 'Seamless pipeline links designed to trigger actions. Hook up database processes, terminal scripting engines, files, or external webhook APIs. Set automated schedules and event-driven hooks easily.'
+            },
+            'gaming-simulators': {
+                icon: '🎮',
+                title: 'Gaming Simulators',
+                desc: 'Perfect simulator integrations for AI gameplay and testing. Hook AlperinoAI to virtual game worlds or sandbox environments to test strategy models, train systems, and generate complex decision cycles.'
+            },
+            'content-creators': {
+                icon: '🎬',
+                title: 'Content Creators',
+                desc: 'Tools designed for media production workflows. Build automated content templates, media organization structures, prompt lists, and multi-step media pipeline processing.'
+            },
+            'local-deployment': {
+                icon: '🏠',
+                title: 'Local Deployment',
+                desc: 'Privacy-first agent structures. Deploy AlperinoAI directly inside local system containers. Run offline inference models securely without sending any code or prompts to external servers.'
+            },
+            'documentation': {
+                icon: '📄',
+                title: 'Documentation',
+                desc: 'Explore comprehensive quickstart tutorials, developer guides, system API references, configuration structures, and sample templates to help you run AlperinoAI within minutes.'
+            },
+            'github-repo': {
+                icon: '🐙',
+                title: 'GitHub Repo',
+                desc: 'Join the community open-source repository. Explore contributor resources, file pull requests, log bugs, and inspect updates for the AlperinoAI platform directly.'
+            },
+            'blog-v15': {
+                icon: '🚀',
+                title: 'Introducing AlperinoAI v1.5',
+                desc: 'Our latest version features a major upgrade to the neural processing framework, reducing local latency. Additionally, RinoOS has been optimized with a sleek new sidebar, better system logs, and responsive layout upgrades.'
+            },
+            'blog-local': {
+                icon: '🛡️',
+                title: 'The Power of Local Inference',
+                desc: 'In this article, we outline why on-premise execution is critical for enterprise security. Local models eliminate third-party data collection while saving thousands in server API processing fees.'
+            }
+        };
+
+        // --- Use Case Tab Content Mapping ---
+        const tabData = {
+            'tab-gaming': {
+                title: 'Gaming Simulators',
+                desc: 'Run autonomous agents to simulate complex system mechanics, economic behaviors, or strategy games in isolated environments.',
+                bullets: [
+                    'Multi-agent economics simulation',
+                    'Local model integration for complex strategy',
+                    'Isolated environment testing sandbox'
+                ],
+                visual: '🎮'
+            },
+            'tab-content': {
+                title: 'Content Creators',
+                desc: 'Automate media production. Organize source folders, schedule prompts, script audio-to-text formats, and structure multi-layered editing systems.',
+                bullets: [
+                    'Dynamic prompt generation logs',
+                    'Multi-step pipeline flow triggers',
+                    'Automated media metadata tag mapping'
+                ],
+                visual: '🎬'
+            },
+            'tab-local': {
+                title: 'Local Deployment',
+                desc: 'Full system sovereignty. Run AlperinoAI within your offline local configurations to maintain maximum security and complete privacy.',
+                bullets: [
+                    'Zero external network server data pings',
+                    'Direct system container configurations',
+                    'High performance local inference setups'
+                ],
+                visual: '🏠'
+            }
+        };
+
+        // --- Interactive Tabs ---
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabTextTitle = document.querySelector('.tab-title');
+        const tabTextDesc = document.querySelector('.tab-desc');
+        const tabTextList = document.querySelector('.tab-list');
+        const tabVisual = document.querySelector('.tab-visual');
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const dataKey = btn.getAttribute('data-tab');
+                const info = tabData[dataKey];
+
+                if (info) {
+                    tabTextTitle.textContent = info.title;
+                    tabTextDesc.textContent = info.desc;
+                    tabVisual.textContent = info.visual;
+
+                    // Rebuild bullets list
+                    tabTextList.innerHTML = '';
+                    info.bullets.forEach(bullet => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<svg width="14" height="14" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> ${bullet}`;
+                        tabTextList.appendChild(li);
+                    });
+                }
+            });
+        });
+
+        // --- Interactive Modals ---
+        const modalOverlay = document.getElementById('detail-modal');
+        const modalIcon = document.getElementById('modal-icon');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalClose = document.getElementById('modal-close');
+
+        function openModal(key) {
+            const data = modalData[key];
+            if (data) {
+                modalIcon.textContent = data.icon;
+                modalTitle.textContent = data.title;
+                modalDesc.textContent = data.desc;
+                modalOverlay.classList.add('open');
+            }
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+        }
+
+        // Hook click events to elements with data-modal attribute
+        document.querySelectorAll('[data-modal]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const key = el.getAttribute('data-modal');
+                openModal(key);
+            });
+        });
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
 
 </body>
